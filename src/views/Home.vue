@@ -30,7 +30,7 @@ onMounted(async () => {
             <div class="bg-white rounded-lg shadow p-6 border-l-4 border-blue-500">
                 <h3 class="text-lg font-semibold text-gray-700 mb-2">Total Data</h3>
                 <p class="text-3xl font-bold text-gray-800">
-                    {{ dataStore.items.length }}
+                    {{ dataStore.pagination.total }}
                 </p>
                 <p class="text-sm text-gray-500 mt-2">Item tersimpan</p>
             </div>
@@ -80,7 +80,7 @@ onMounted(async () => {
             </div>
 
             <ul v-else class="divide-y divide-gray-200">
-                <li v-for="item in dataStore.items.slice(0, 5)" :key="item.id"
+                <li v-for="item in dataStore.items.slice(0, 3)" :key="item.id"
                     class="hover:bg-gray-50 transition-colors">
                     <router-link :to="{ name: 'data.detail', params: { id: item.id } }" class="block p-6">
                         <div class="flex justify-between items-start">
@@ -98,7 +98,7 @@ onMounted(async () => {
                 </li>
             </ul>
 
-            <div v-if="dataStore.items.length > 5" class="p-4 border-t border-gray-200 text-center">
+            <div v-if="dataStore.items.length > 3" class="p-4 border-t border-gray-200 text-center">
                 <router-link to="/data" class="text-blue-600 hover:text-blue-800 text-sm font-medium">
                     Lihat semua data →
                 </router-link>
@@ -122,7 +122,7 @@ onMounted(async () => {
                 </div>
             </router-link>
 
-            <router-link v-if="authStore.user" to="/profile"
+            <!-- <router-link v-if="authStore.user" to="/profile"
                 class="p-6 bg-white rounded-lg shadow hover:shadow-md transition-shadow flex items-center">
                 <div class="bg-purple-100 p-3 rounded-full mr-4">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-purple-600" fill="none"
@@ -135,7 +135,7 @@ onMounted(async () => {
                     <h3 class="font-medium text-gray-800">Profil Anda</h3>
                     <p class="text-sm text-gray-500">Kelola akun pengguna</p>
                 </div>
-            </router-link>
+            </router-link> -->
         </div>
     </div>
 </template>
