@@ -230,7 +230,7 @@ const displayedPages = computed(() => {
         </div>
 
         <div v-else>
-            <div class="bg-white shadow rounded-lg overflow-hidden mb-6">
+            <div class="bg-white shadow table-responsive rounded-lg overflow-x-auto">
                 <table class="min-w-full divide-y divide-gray-200">
                     <thead class="bg-gray-50">
                         <tr>
@@ -255,7 +255,7 @@ const displayedPages = computed(() => {
                                     <span class="ml-1">{{ sortIcon('name') }}</span>
                                 </div>
                             </th>
-                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer hover:bg-gray-100"
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider min-w-[200px] cursor-pointer hover:bg-gray-100"
                                 @click="handleSort('description')">
                                 <div class="flex items-center">
                                     Description
@@ -273,7 +273,11 @@ const displayedPages = computed(() => {
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ item.id }}</td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ item.name }}
                             </td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ item.description }}</td>
+                            <td class="px-6 py-4 text-sm text-gray-500 whitespace-normal">
+                                <div class="max-w-[300px]">
+                                    {{ item.description }}
+                                </div>
+                            </td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
                                 <router-link :to="{ name: 'data.detail', params: { id: item.id } }"
                                     class="text-blue-600 hover:text-blue-900 mr-3">
@@ -356,5 +360,89 @@ th {
     background-color: #f3f4f6;
     /* bg-gray-100 */
     font-weight: 600;
+}
+
+.pagination-container {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.pagination-button {
+    min-width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 8px;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    font-size: 14px;
+    transition: all 0.2s ease;
+}
+
+.pagination-button:hover:not(.active) {
+    background-color: #f3f4f6;
+}
+
+.pagination-button.active {
+    background-color: #4f46e5;
+    color: white;
+    border-color: #4f46e5;
+}
+
+.pagination-ellipsis {
+    display: flex;
+    align-items: center;
+    padding: 0 8px;
+}
+
+/* Tambahkan di bagian style */
+.table-responsive {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    -ms-overflow-style: -ms-autohiding-scrollbar;
+}
+
+/* Garis bantu untuk debugging */
+.table-responsive table {
+    min-width: 800px;
+    /* Minimum width sebelum scroll muncul */
+    width: 100%;
+}
+
+/* Style untuk sel deskripsi */
+.whitespace-normal {
+    white-space: normal;
+    word-wrap: break-word;
+    word-break: break-word;
+}
+
+/* Padding dan border untuk sel */
+td,
+th {
+    padding: 12px 15px;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+/* Warna hover untuk row */
+tbody tr:hover {
+    background-color: #f8fafc;
+}
+
+/* Responsive breakpoints */
+@media (max-width: 768px) {
+    .table-responsive {
+        border: 0;
+    }
+
+    .table-responsive table {
+        min-width: 100%;
+    }
+
+    td .max-w-[300px] {
+        max-width: 200px;
+    }
 }
 </style>
