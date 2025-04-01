@@ -1,8 +1,15 @@
 import api from './index'
 
 export default {
-    getItems() {
-        return api.get('/items')
+    getItems(params) {
+        const safeParams = {
+            ...params,
+            search: params.search ? String(params.search) : undefined
+        }
+
+        return api.get('/items', {
+            params: safeParams
+        });
     },
     getItem(id) {
         return api.get(`/items/${id}`)
